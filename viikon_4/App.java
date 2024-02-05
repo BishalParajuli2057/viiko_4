@@ -2,41 +2,38 @@ package viikon_4;
 import java.util.Scanner;
 
 public class App {
-    private static University university = new University();
-    private static Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
-        boolean running = true;
+        Scanner scanner = new Scanner(System.in);
+        University university = new University();
 
-        while (running) {
+        while (true) {
             System.out.println("1) Lisää opiskelija, 2) Listaa opiskelijat, 3) Lisää opiskelijalle suorite, 4) Listaa opiskelijan suoritteet, 5) Laske opiskelijan suoritusten keskiarvo, 6) Laske opiskelijan suoritusten mediaani, 7) Tallenna opiskelijat tiedostoon, 8) Lataa opiskelijat tiedostosta, 0) Lopeta ohjelma");
-            int choice = Integer.parseInt(scanner.nextLine());
+            String choice = scanner.nextLine(); 
 
             switch (choice) {
-                case 1:
+                case "1":
                     System.out.println("Anna opiskelijan nimi?");
                     String name = scanner.nextLine();
                     System.out.println("Anna opiskelijan opiskelijanumero:");
                     String studentNumber = scanner.nextLine();
-                    university.addStudent(new Student(name, studentNumber));
+
+                    Student student = new Student(name, studentNumber);
+                    university.addStudent(student);
                     break;
-                case 2:
+                case "2":
                     System.out.println("Opiskelijat:");
-                    for (Student student : university.getStudents()) {
-                    System.out.println(student);
-                    break;
+                    for (Student s : university.getStudents()) {
+                        System.out.println(s);
                     }
-                
-                case 0:
-                    running = false;
-                    System.out.println("Kiitos ohjelman käytöstä.");
                     break;
+                case "0":
+                    System.out.println("Kiitos ohjelman käytöstä.");
+                    return;
                 default:
-                    System.out.println("Virheellinen valinta.");
+                    System.out.println("Syöte oli väärä");
                     break;
             }
         }
     }
 }
-                
-                
+
